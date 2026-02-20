@@ -11,6 +11,11 @@ function createFruitMesh(x, z) {
   const geometry = new THREE.BoxGeometry(1, 1, 1);
   const material = new THREE.MeshBasicMaterial({ color: 'red' });
   fruit = new THREE.Mesh(geometry, material);
+
+  const edgeGeometry = new THREE.EdgesGeometry(geometry);
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 'black'});
+    const outline = new THREE.LineSegments(edgeGeometry, lineMaterial);
+  fruit.add(outline);
   fruit.castShadow = true
   fruit.position.set(x, 0.5, z);
   scene.add(fruit);

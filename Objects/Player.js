@@ -4,6 +4,8 @@ import { spawnFruit, checkFruitCollision } from './Fruit';
 
 const gridSize = 1;
 const boardLimit = 10;
+let score = 0;
+const scoreElement = document.getElementById('scoreValue');
 
 let snake = [
   { x: 0, z: 0 }
@@ -19,10 +21,10 @@ spawnFruit(snake);
 
 function createSegment(x, z) {
   const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshPhysicalMaterial({ color: 'red' });
+  const material = new THREE.MeshPhysicalMaterial({ color: 'white' });
 
-  const edgeGeometry = new THREE.EdgesGeometry();
-  const lineMaterial = new THREE.LineBasicMaterial({ color: 'white'});
+  const edgeGeometry = new THREE.EdgesGeometry(geometry);
+  const lineMaterial = new THREE.LineBasicMaterial({ color: 'black'});
   const outline = new THREE.LineSegments(edgeGeometry, lineMaterial);
 
   const mesh = new THREE.Mesh(geometry, material);
@@ -59,9 +61,16 @@ export function moveSnake() {
   if (checkFruitCollision(newHead)) {
     growSnake();
     spawnFruit(snake);
+    score += 10;
+  scoreElement.textContent = score;
+  } else {
+    snake.pop();
   }
 
-  if (checkWallCollision(newHead)) console.log('Wall Collision');
+  if (checkWallCollision(newHead)) {
+    console.log('Wall Collision');
+    return;
+  }
   if (checkSelfCollision()) console.log('dead');
 
   updateMeshes();

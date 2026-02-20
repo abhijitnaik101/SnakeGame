@@ -14,13 +14,23 @@ window.addEventListener('keyup', (e) => (keys[e.key] = false));
 let moveInterval = 200; //millisec
 let lastMoveTime = 0;
 
+let gameStarted = false;
+const startScreen = document.getElementById('startScreen');
+const startBtn = document.getElementById('startBtn');
+
+startBtn.addEventListener('click', () => {
+  gameStarted = true;
+  startScreen.style.display = 'none';
+});
 
 function animate(time) {
   controls.object = camera;
 
-  if (time - lastMoveTime > moveInterval) {
-    moveSnake();
-    lastMoveTime = time;
+  if (gameStarted) {
+    if (time - lastMoveTime > moveInterval) {
+      moveSnake();
+      lastMoveTime = time;
+    }
   }
 
   changeCamera(keys);

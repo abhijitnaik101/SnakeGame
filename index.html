@@ -1,43 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Basilisk</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
 
-  <body class="m-0 overflow-hidden bg-black">
+<head>
+  <meta charset="utf-8" />
+  <title>Basilisk</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    <div class="absolute left-20 top-4 bg-black text-white rounded-lg py-2 px-4 font-semibold">WASD - to move</div>
+<body class="m-0 overflow-hidden bg-black">
+  
 
-    <div id="scoreBoard"
-      class="absolute top-4 left-1/2 -translate-x-1/2
-             px-6 py-2 rounded-xl
-             bg-black
-             text-white text-xl font-semibold
-             shadow-lg"
-    >
-      Score: <span id="scoreValue">0</span>
+  <div class="absolute left-10 top-5 bg-white text-black shadow-2xl rounded-lg py-4 px-4 font-semibold">
+    <p class="border-b border-gray pb-2 mb-2">Movement:</p>
+    <p>W / Up Arrow - <span class="text-orange-500">Move Forward</span></p>
+    <p>S / Down Arrow - <span>Move Backward</span></p>
+    <p>A / Left Arrow - <span>Move Left</span></p>
+    <p>D / Right Arrow - <span>Move Right</span></p>
+  </div>
+
+  <div id="scoreBoard"
+    class="absolute top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-xl bg-black text-white text-xl font-semibold shadow-lg">
+    Score: <span id="scoreValue">0</span>
+  </div>
+
+  <div id="startScreen" class="absolute inset-0 z-10 flex items-center justify-center bg-black/80">
+    <div class="text-center space-y-6">
+      <h1 class="text-4xl font-bold text-white tracking-wide">
+        Basilisk
+      </h1>
+      <button id="startBtn"
+        class="px-8 py-3 text-lg font-semibold text-white bg-green-500 rounded-lg shadow-lg transition-all duration-200 hover:bg-green-600 hover:scale-105 active:scale-95">
+        Start Game
+      </button>
     </div>
-    
-    <div
-      id="startScreen"
-      class="absolute inset-0 z-10 flex items-center justify-center bg-black/80"
-    >
-      <div class="text-center space-y-6">
-        <h1 class="text-4xl font-bold text-white tracking-wide">
-          Basilisk
-        </h1>
+  </div>
 
-        <button
-          id="startBtn"
-          class="px-8 py-3 text-lg font-semibold text-white bg-green-500 rounded-lg shadow-lg transition-all duration-200 hover:bg-green-600 hover:scale-105 active:scale-95"
-        >
-          Start Game
-        </button>
-      </div>
+  <div id="restartModal"
+     class="fixed inset-0 hidden items-center justify-center bg-black/70 z-50 flex justify-center items-center">
+    <div class="bg-white w-64 h-40 rounded-xl flex flex-col items-center justify-center space-y-4 shadow-2xl">
+      <h2 class="text-xl font-bold text-gray-800">Game Over</h2>
+      <score>Score : <span id="score">0</span></score>
+      <button id="restartButton"
+        class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+        Restart
+      </button>
     </div>
+</div>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

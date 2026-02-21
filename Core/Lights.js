@@ -3,7 +3,7 @@ import { scene } from './Scene';
 
 const ambientLight = new THREE.AmbientLight('white', 1);
 
-const directionalLight = new THREE.DirectionalLight('white', 10);
+const directionalLight = new THREE.DirectionalLight('white', 8);
 directionalLight.position.set(5, 5, 5);
 directionalLight.castShadow = true;
 directionalLight.lookAt(0,0,0);
@@ -11,4 +11,3 @@ const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight
 
 scene.add(ambientLight);
 scene.add(directionalLight);
-scene.add(directionalLightHelper);

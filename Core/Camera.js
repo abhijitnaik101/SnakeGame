@@ -9,7 +9,7 @@ perspectiveCamera.rotation.x = Math.PI/4;
 //#endregion
 
 //#region Orthographic Camera
-const width = 50, height = 50;
+const width = 25, height = 25;
 const aspect = window.innerWidth / window.innerHeight;
 const orthographicCamera = new THREE.OrthographicCamera(
     -width/2 * aspect, width/2 * aspect,
@@ -21,7 +21,7 @@ orthographicCamera.lookAt(0, 0, 0);
 
 
 export let camera = new THREE.Camera()
-camera = perspectiveCamera;
+camera = orthographicCamera;
 
 export function changeCamera(keys){
     if(keys['-']) {

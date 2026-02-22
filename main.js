@@ -15,7 +15,7 @@ window.addEventListener('keyup', (e) => (keys[e.key] = false));
 let lastMoveTime = 0;
 
 let gameStarted = false;
-const startScreen = document.getElementById('startScreen');
+const startScreen = document.getElementById('sceneSelectScreen');
 const startBtn = document.getElementById('startBtn');
 
 startBtn.addEventListener('click', () => {

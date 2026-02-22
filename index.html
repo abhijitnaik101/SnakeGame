@@ -5,17 +5,109 @@
   <meta charset="utf-8" />
   <title>Basilisk</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
 </head>
 
 <body class="m-0 overflow-hidden bg-black">
-  
 
-  <div class="absolute left-10 top-5 bg-white text-black shadow-2xl rounded-lg py-4 px-4 font-semibold">
+  <div id="loadingScreen" class="fixed inset-0 z-50 overflow-hidden animate-screenFade">
+    <div class="absolute inset-0 bg-white"></div>
+      
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center space-y-4">
+      <img src="./Images/bg6.jpg" alt="Loading Background"
+      class="absolute w-1/4 h-4/5 -top-20 object-cover animate-imageFade"/>
+      <h1 class="relative text-9xl top-20 text-black font-bold tracking-wide animate-contentFade pirata-one-regular">
+        Basilisk
+      </h1>
+      <p class="absolute left-1/2 bottom-10 text-lg text-black animate-pulse pirata-one-regular">
+        Loading...
+      </p>
+    </div>
+</div>
+
+<div id="nameModal"
+  class="fixed inset-0 z-20 hidden flex items-center justify-center bg-white">
+  <div id="nameBox" class="bg-white w-80 rounded-xl p-6 space-y-4 shadow-2xl text-center border-2">
+    <h2 class="text-xl font-bold text-gray-800 pirata-one-regular">Enter your name</h2>
+    <input id="playerNameInput" type="text"
+      class="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-slate-400" />
+    <button id="saveNameBtn"
+      class="w-full py-2 bg-black border-2 border-black text-white rounded-lg hover:bg-white hover:text-black transition">
+      Continue
+    </button>
+  </div>
+</div>
+
+<div id="sceneSelectScreen"
+  class="fixed inset-0 hidden z-40 bg-black text-white flex flex-col">
+  <div class="text-center py-10">
+    <h2 class="text-4xl font-bold tracking-wide">Welcome, <span id="displayPlayerName" class="text-green-400"></span></h2>
+    <p class="text-gray-400 mt-2">
+      Select Your Arena
+    </p>
+  </div>
+
+  <div class="flex-1 flex items-center justify-center px-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition transform hover:scale-105 hover:shadow-green-500/30">
+        <img src="./Images/bg4.jpg" alt="Classic Arena" class="w-full h-48 object-cover">
+        <div class="p-6 space-y-4">
+          <h3 class="text-2xl font-bold text-green-400">
+            Classic Arena
+          </h3>
+          <p class="text-sm text-gray-300">
+            A traditional snake battlefield. Portals twist space,
+            fruits increase your length, and one mistake ends it all.
+          </p>
+          <button id="startBtn" class="w-full py-3 bg-green-600 rounded-lg hover:bg-green-700 transition shadow-lg font-semibold tracking-wide">
+            Start Scene
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="absolute left-10 top-5 bg-white text-black shadow-2xl rounded-lg py-4 px-4 font-semibold z-10">
     <p class="border-b border-gray pb-2 mb-2">Movement:</p>
     <p>W / Up Arrow - <span class="text-orange-500">Move Forward</span></p>
-    <p>S / Down Arrow - <span>Move Backward</span></p>
-    <p>A / Left Arrow - <span>Move Left</span></p>
-    <p>D / Right Arrow - <span>Move Right</span></p>
+    <p>S / Down Arrow - <span class="text-orange-500">Move Backward</span></p>
+    <p>A / Left Arrow - <span class="text-orange-500">Move Left</span></p>
+    <p>D / Right Arrow - <span class="text-orange-500">Move Right</span></p>
+  </div>
+
+  <div class="absolute right-10 top-5 w-96 bg-white text-black shadow-2xl rounded-lg py-4 px-4 font-semibold z-10">
+    <p class="border-b border-gray pb-2 mb-2">Tutorial:</p>
+    <div class="flex items-center gap-4 mb-4">
+      <img src="./Images/player.png" alt="Step 1" class="w-12 h-12 object-cover rounded-md">
+      <div>
+        <h3 class="font-bold">Player</h3>
+        <p class="text-sm font-normal text-gray-600">
+          Player controlled with keys, touching youself causes loss.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mb-4">
+      <img src="./Images/fruit.png" alt="Step 1" class="w-12 h-12 object-cover rounded-md">
+      <div>
+        <h3 class="font-bold">Fruit</h3>
+        <p class="text-sm font-normal text-gray-600">
+          Eating fruits will increase your score by +1;
+        </p>
+      </div>
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+      <img src="./Images/portal.png" alt="Step 1" class="w-12 h-12 object-cover rounded-md">
+      <div>
+        <h3 class="font-bold">Portal</h3>
+        <p class="text-sm font-normal text-gray-600">
+          Enter portal to exit through another portal. This can either help you or create challenges.
+        </p>
+      </div>
+    </div>
   </div>
 
   <div id="scoreBoard"
@@ -23,30 +115,93 @@
     Score: <span id="scoreValue">0</span>
   </div>
 
-  <div id="startScreen" class="absolute inset-0 z-10 flex items-center justify-center bg-black/80">
-    <div class="text-center space-y-6">
-      <h1 class="text-4xl font-bold text-white tracking-wide">
-        Basilisk
-      </h1>
-      <button id="startBtn"
-        class="px-8 py-3 text-lg font-semibold text-white bg-green-500 rounded-lg shadow-lg transition-all duration-200 hover:bg-green-600 hover:scale-105 active:scale-95">
-        Start Game
-      </button>
-    </div>
-  </div>
-
   <div id="restartModal"
-     class="fixed inset-0 hidden items-center justify-center bg-black/70 z-50 flex justify-center items-center">
+    class="fixed inset-0 hidden items-center justify-center bg-black/70 z-50 flex justify-center items-center">
     <div class="bg-white w-64 h-40 rounded-xl flex flex-col items-center justify-center space-y-4 shadow-2xl">
       <h2 class="text-xl font-bold text-gray-800">Game Over</h2>
       <score>Score : <span id="score">0</span></score>
-      <button id="restartButton"
-        class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+      <button id="restartButton" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
         Restart
       </button>
     </div>
-</div>
+  </div>
+  <style>
+/* Entire screen fade out at end */
+@keyframes screenFade {
+  0%   { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { opacity: 1; visibility: hidden; }
+}
 
+/* Image fades in over black */
+@keyframes imageFade {
+  0%   { opacity: 0; }
+  20%  {opacity : 0;}
+  50%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Text fades in slightly later */
+@keyframes contentFade {
+  0%   { opacity: 0; transform: translateY(10px); }
+  20%  { opacity: 0; transform: translateY(10px); }
+  50%  { opacity: 1; transform: translateY(0); }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-screenFade {
+  animation: screenFade 8s ease forwards;
+}
+
+.animate-imageFade {
+  animation: imageFade 8s ease forwards;
+}
+
+.animate-contentFade {
+  animation: contentFade 8s ease forwards;
+}
+
+.pirata-one-regular {
+  font-family: "Pirata One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+</style>
+
+<script>
+const loadingScreen = document.getElementById("loadingScreen");
+const nameModal = document.getElementById("nameModal");
+const saveNameBtn = document.getElementById("saveNameBtn");
+const playerNameInput = document.getElementById("playerNameInput");
+
+const sceneSelectScreen = document.getElementById("sceneSelectScreen");
+const displayPlayerName = document.getElementById("displayPlayerName");
+
+/* After loading ends → show name modal */
+loadingScreen.addEventListener("animationend", () => {
+  nameModal.classList.remove('hidden');
+  loadingScreen.remove();
+  
+});
+
+/* Save name → show scene screen */
+saveNameBtn.addEventListener("click", () => {
+  const name = playerNameInput.value.trim();
+  if (!name) return;
+
+  sessionStorage.setItem("playerName", name);
+
+  displayPlayerName.textContent = name;
+
+  nameModal.classList.add("hidden");
+  sceneSelectScreen.classList.remove("hidden");
+});
+
+
+</script>
   <script type="module" src="/main.js"></script>
 </body>
 

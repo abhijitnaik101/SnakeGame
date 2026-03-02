@@ -11,9 +11,11 @@ let portalMeshB = null;
 
 let lastTeleportTick = -1;
 
+let minCollisionDistance = 0.6;
+
 const portalGeometry = new THREE.PlaneGeometry(1,1);
-const materialA = new THREE.MeshStandardMaterial({ color: '#094100', side:THREE.DoubleSide});
-const materialB = new THREE.MeshStandardMaterial({ color: '#094100', side:THREE.DoubleSide});
+const materialA = new THREE.MeshStandardMaterial({ color: '#ff4000', side:THREE.DoubleSide});
+const materialB = new THREE.MeshStandardMaterial({ color: '#ff4000', side:THREE.DoubleSide});
 
 const edge = new THREE.EdgesGeometry(portalGeometry);
 const line = new THREE.LineBasicMaterial({color: 'black'});
@@ -70,12 +72,13 @@ export function handlePortalTeleport(head, tick, snake) {
 
   let teleported = false;
 
-  if (head.x === portalA.x && head.z === portalA.z) {
+
+  if (Math.abs(head.x - portalA.x) < minCollisionDistance  && Math.abs(head.z -  portalA.z) < minCollisionDistance) {
     head.x = portalB.x;
     head.z = portalB.z;
     teleported = true;
   }
-  else if (head.x === portalB.x && head.z === portalB.z) {
+  else if (Math.abs(head.x - portalB.x) < minCollisionDistance  && Math.abs(head.z -  portalB.z) < minCollisionDistance) {
     head.x = portalA.x;
     head.z = portalA.z;
     teleported = true;

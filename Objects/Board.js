@@ -4,7 +4,7 @@ import { scene } from '../Core/Scene';
 const planeHeight = 20, planeWidth = 20;
 const boundaryHeight = 1, boundaryLength = 20, boundaryThickness = 1;
 const planeGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-const planeMaterial = new THREE.MeshStandardMaterial({color: 'green', side : THREE.DoubleSide});
+const planeMaterial = new THREE.MeshStandardMaterial({color: '#ff9c2b', side : THREE.DoubleSide});
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 plane.receiveShadow = true;
 plane.rotation.x = -Math.PI /2 ;
